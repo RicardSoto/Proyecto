@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>Cancha</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+    </head>
+    <body>
+        <div>
+            
+            <ui:composition template="/plantillas/plantillaAdmin.xhtml">
+                 <ui:define name="content">
+                     
+                        <div>
+                      <h2 style="text-align: center;">Sanciones</h2>
+                      <h:form>
+            
+            <h:dataTable value = "#{SancionController.sancion}" var="o">
+            <h:column>
+                <label> Nombre de la sancion</label>
+              <!-- -->
+               <h:inputText value="#{o.nombreSancion}" />               
+              
+            </h:column>
+           
+                <h:column>
+               <label>Guardar</label>
+                <h:commandButton value="Crear" actionListener="#{SancionController.crear()}"/> 
+               </h:column>
+            </h:dataTable>
+           
+        </h:form>
+    </div>
+                      <h:form>
+                    <h2 style="text-align: center;">Sanciones</h2>
+                    <h:dataTable value = "#{SancionController.sanciones}" var = "s" styleClass="sancion-table"
+    			headerClass="sanciones-table-header"
+    			rowClasses="sanciones-table-odd-row,sanciones-table-even-row"> 
+
+                        <h:column>
+                            
+                             <f:facet name = "header">Nombre</f:facet>    				
+                           
+                       <p:inputText value="#{s.nombreSancion}"  rendered="#{SancionController.editable}"/>
+		       <h:outputText value="#{s.nombreSancion}" rendered="#{!SancionController.editable}"/>
+                                
+                                
+                                                   </h:column>	
+                     
+                            
+                     
+                  
+                        
+                        <h:column>
+                           <f:facet name="header">Edit</f:facet>
+                           <h:commandButton value="Edit" 
+                              action="#{SancionController.editable()}" 
+                              rendered="#{!SancionController.editable}">        
+                              <f:setPropertyActionListener 
+                                  target="#{SancionController.sancion}" 
+                                 value="#{s}" />
+                           </h:commandButton>
+                         
+                            <h:commandButton value="Save" action="#{SancionController.edit()}" rendered="#{SancionController.editable}" />
+                            <h:commandButton value="Cancel" action="#{SancionController.cancel()}" rendered="#{SancionController.editable}" />
+                          <h:commandButton value="Eliminar" action="#{SancionController.eliminar()}" rendered="#{SancionController.editable}" />
+                           
+                        </h:column>
+		
+		
+
+
+     
+
+                     </h:dataTable>
+  </h:form>                  
+
+                 </ui:define>  
+            </ui:composition>
+              
+        </div>
+    </body>
+</html>

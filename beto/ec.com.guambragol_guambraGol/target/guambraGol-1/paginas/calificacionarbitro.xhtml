@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <head>
+        <title>Cancha</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+    </head>
+    <body>
+        <div>
+            
+            <ui:composition template="/plantillas/plantillaAdmin.xhtml">
+                 <ui:define name="content">
+                     
+                        <div>
+                      <h2 style="text-align: center;">Calificacion Arbitro</h2>
+                      <h:form>
+            
+                          <h:dataTable value = "#{CalificacionArbitroController.calificacion}" var="o">
+            <h:column>
+                <label> Personalidad</label>
+              <!-- -->
+               <h:inputText value="#{o.personalidad}" />               
+              
+            </h:column>
+             <h:column>
+                <label> Estado Fisico</label>
+              <!-- -->
+               <h:inputText value="#{o.estadoFisico}" />               
+              
+            </h:column>
+            <h:column>
+                <label> Conocimineto</label>
+              <!-- -->
+               <h:inputText value="#{o.conocimiento}" />               
+              
+            </h:column>
+                              <h:column>
+                <label>Imparcialidad</label>
+              <!-- -->
+               <h:inputText value="#{o.imparcialidad}" />               
+              
+            </h:column>
+                                           <h:column>
+                <label>Identificación</label>
+              <!-- -->
+               <h:inputText value="#{o.identificacion}" />               
+              
+            </h:column>
+                                <h:column>
+                <label>Total</label>
+              <!-- -->
+               <h:inputText value="#{o.total}" />               
+              
+            </h:column>
+                <h:column>
+               <label>Guardar</label>
+                <h:commandButton value="Crear" actionListener="#{CalificacionArbitroController.crear()}"/> 
+               </h:column>
+            </h:dataTable>
+           
+        </h:form>
+    </div>
+                      <h:form>
+                    <h2 style="text-align: center;">Calificaciones</h2>
+                    <h:dataTable value = "#{CalificacionArbitroController.calificaciones}" var = "s" > 
+
+                        <h:column>
+                            
+                             <f:facet name = "header">Personalidad</f:facet>    				
+                           
+                       <p:inputText value="#{s.personalidad}"  rendered="#{CalificacionArbitroController.editable}"/>
+		       <h:outputText value="#{s.personalidad}" rendered="#{!CalificacionArbitroController.editable}"/>
+                                
+                                
+                                                   </h:column>	
+                       <h:column>
+                            
+                             <f:facet name = "header">Estado Fisico</f:facet>    				
+                           
+                       <p:inputText value="#{s.estadoFisico}"  rendered="#{CalificacionArbitroController.editable}"/>
+		       <h:outputText value="#{s.estadoFisico}" rendered="#{!CalificacionArbitroController.editable}"/>
+                                
+                                
+                                                   </h:column>	
+                                    <h:column>
+                            
+                             <f:facet name = "header">Conocimiento</f:facet>    				
+                           
+                       <p:inputText value="#{s.conocimiento}"  rendered="#{CalificacionArbitroController.editable}"/>
+		       <h:outputText value="#{s.conocimiento}" rendered="#{!CalificacionArbitroController.editable}"/>
+                                
+                                
+                                                   </h:column>
+                         <h:column>
+                            
+                             <f:facet name = "header">Imparcialidad</f:facet>    				
+                           
+                       <p:inputText value="#{s.imparcialidad}"  rendered="#{CalificacionArbitroController.editable}"/>
+		       <h:outputText value="#{s.imparcialidad}" rendered="#{!CalificacionArbitroController.editable}"/>
+                                
+                                
+                                                   </h:column>
+                        
+                           <h:column>
+                            
+                             <f:facet name = "header">Identificacion</f:facet>    				
+                           
+                       <p:inputText value="#{s.identificacion}"  rendered="#{CalificacionArbitroController.editable}"/>
+		       <h:outputText value="#{s.identificacion}" rendered="#{!CalificacionArbitroController.editable}"/>
+                                
+                                
+                                                   </h:column>
+                        
+                         <h:column>
+                            
+                             <f:facet name = "header">Total</f:facet>    				
+                           
+                       <p:inputText value="#{s.total}"  rendered="#{CalificacionArbitroController.editable}"/>
+		       <h:outputText value="#{s.total}" rendered="#{!CalificacionArbitroController.editable}"/>
+                                
+                                
+                                                   </h:column>
+                     
+                  
+                        
+                        <h:column>
+                           <f:facet name="header">Edit</f:facet>
+                           <h:commandButton value="Edit" 
+                              action="#{CalificacionArbitroController.editable()}" 
+                              rendered="#{!CalificacionArbitroController.editable}">        
+                              <f:setPropertyActionListener 
+                                  target="#{CalificacionArbitroController.calificacion}" 
+                                 value="#{s}" />
+                           </h:commandButton>
+                         
+                            <h:commandButton value="Save" action="#{CalificacionArbitroController.edit()}" rendered="#{CalificacionArbitroController.editable}" />
+                            <h:commandButton value="Cancel" action="#{CalificacionArbitroController.cancel()}" rendered="#{CalificacionArbitroController.editable}" />
+                          <h:commandButton value="Eliminar" action="#{CalificacionArbitroController.eliminar()}" rendered="#{CalificacionArbitroController.editable}" />
+                           
+                        </h:column>
+		
+		
+
+
+     
+
+                     </h:dataTable>
+  </h:form>                  
+
+                 </ui:define>  
+            </ui:composition>
+              
+        </div>
+    </body>
+</html>

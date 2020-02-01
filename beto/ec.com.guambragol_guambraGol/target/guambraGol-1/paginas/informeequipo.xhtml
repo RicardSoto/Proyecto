@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+    <!DOCTYPE html>
+    <html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+    <body>
+
+        <head>
+            <title>Campeonato</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        </head>
+
+        <body>
+
+            <div>
+
+                <ui:composition template="/plantillas/plantillaAdmin.xhtml">
+                    <ui:define name="content">
+                        <div>
+                            <h2 style="text-align: center;">Agregar un nuevo informe de equipo</h2>
+                            <h:form>
+
+                                <h:dataTable value="#{informeEquipo.informe}" var="o">
+                                    <h:column>
+                                        <label>Balon</label>
+                                     
+                                        <h:inputText value="#{o.balon}" />
+
+                                    </h:column>
+                                    <h:column>
+                                        <label>Cinta</label>
+                                        
+                                        <h:inputText value="#{o.cinta}" />
+
+                                    </h:column>
+                  
+                                    <h:column>
+                                          <label>Informe vocal</label>
+                                       <h:selectOneMenu value="#{o.idInformeVocal}" >
+                                           <f:selectItems value="#{informeEquipo.informesvocal}" var="t" itemValue="#{t.idInformeVocal}" itemLabel="#{t.toString()}" />
+                                </h:selectOneMenu>
+                                    </h:column>
+                                    <h:column>
+                                        <label>Guardar</label>
+                                        <h:commandButton value="Crear" actionListener="#{informeEquipo.crear()}" />
+                                    </h:column>
+                                </h:dataTable>
+
+                            </h:form>
+                        </div>
+                        <h:form>
+                            <h2 style="text-align: center;">Informes</h2>
+                            <h:dataTable value="#{informeEquipo.informes}" var="i">
+
+                                <h:column>
+
+                                    <f:facet name="header">Balon</f:facet>
+
+                                    <p:inputText value="#{i.balon}" rendered="#{informeEquipo.editable}" />
+
+                                    <h:outputText value="#{i.balon}" rendered="#{!informeEquipo.editable}" />
+
+                                </h:column>
+
+                                <h:column>
+
+                                    <f:facet name="header">Cinta</f:facet>
+
+                                    <p:inputText value="#{i.cinta}" rendered="#{informeEquipo.editable}" />
+
+                                    <h:outputText value="#{i.cinta}" rendered="#{!informeEquipo.editable}" />
+
+                                </h:column>
+                         
+                                <h:column>
+
+                                    <f:facet name="header">Informe vocal</f:facet>
+
+                                    <h:selectOneMenu value="#{i.idInformeVocal}" rendered="#{informeEquipo.editable}" >
+                                        <f:selectItems value="#{informeEquipo.informesvocal}" var="t" itemValue="#{t.idInformeVocal}" itemLabel="#{t.toString()}" />
+                                </h:selectOneMenu>
+
+                                    <h:outputText value="#{i.idInformeVocal}" rendered="#{!informeEquipo.editable}" />
+
+                                </h:column>
+                             
+                                <h:column>
+                                    <f:facet name="header">Edit</f:facet>
+
+                                    <h:commandButton value="Edit" action="#{informeEquipo.editable()}" rendered="#{!informeEquipo.editable}">
+                                        <f:setPropertyActionListener target="#{informeEquipo.informe}" value="#{i}" />
+                                    </h:commandButton>
+
+                                    <h:commandButton value="Save" action="#{informeEquipo.edit()}" rendered="#{informeEquipo.editable}" />
+                                    <h:commandButton value="Cancel" action="#{informeEquipo.cancel()}" rendered="#{informeEquipo.editable}" />
+                                    <h:commandButton value="Eliminar" action="#{informeEquipo.eliminar()}" rendered="#{informeEquipo.editable}" />
+
+                                </h:column>
+                            </h:dataTable>
+                        </h:form>
+
+                    </ui:define>
+                </ui:composition>
+
+            </div>
+        </body>
+    </body>
+
+    </html>
